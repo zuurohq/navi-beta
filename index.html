@@ -48,9 +48,9 @@
   .stat .n{font-size:clamp(21px,3.6vw,27px);font-weight:680;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
   .stat .l{font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.35}
   .band{border-radius:14px;padding:20px;margin:20px 0;border:1px solid}
-  .band-risk{background:var(--risk-bg);border-color:var(--risk-line);border-left-width:5px}
-  .band-risk h2{margin-top:0;color:var(--risk-ink)}
-  .band-risk .stat{background:transparent;border-color:var(--risk-line)}
+  .band-usp{background:var(--panel);border-color:var(--accent);border-left-width:5px;margin-top:34px}
+  .band-usp h2{margin-top:0;color:var(--accent)}
+  .band-usp .stat{background:var(--bg)}
   .note{background:var(--warn-bg);border:1px solid var(--warn-line);border-left-width:5px;color:var(--warn-ink);
     border-radius:12px;padding:16px 18px 6px;margin:20px 0;font-size:15px;max-width:var(--measure)}
   .note ol{margin:0 0 10px;padding-left:22px} .note li{margin-bottom:9px}
@@ -93,6 +93,20 @@
   limits. Over three years of backtesting it made money — and it would have failed roughly two evaluation
   attempts in three. Both halves of that sentence matter, so this page gives you both.</p>
 </header>
+
+<div class="band band-usp">
+  <h2>The daily loss limit is the point</h2>
+  <p>Most strategies blow prop evaluations on one bad day. This one tracks the day's profit and loss —
+  <em>including the trade that is still open</em> — and refuses a setup when the risk would not fit in the room
+  left under the limit.</p>
+  <div class="grid">
+    <div class="stat"><div class="n">631</div><div class="l">Trading days backtested</div></div>
+    <div class="stat"><div class="n">−$962</div><div class="l">Worst single day</div></div>
+    <div class="stat"><div class="n pos">0</div><div class="l">Days that broke the $1,000 limit</div></div>
+  </div>
+  <p class="fine">Note this is one number TradingView's Strategy Tester will not show you: it reports the
+  largest drawdown, but never the worst <em>day</em>.</p>
+</div>
 
 <h2>The three-year backtest</h2>
 <p class="fine">TradingView Deep Backtest, entire available history, 20 Sep 2023 – 17 Sep 2026. 8 micro
@@ -139,49 +153,7 @@ last closed trade.</p>
 <div class="rcard"><div class="rc-h">Last 365 days</div><dl><div><dt>Net</dt><dd class="pos">+$22,554</dd></div><div><dt>Trades</dt><dd>282</dd></div><div><dt>Profit factor</dt><dd>1.26</dd></div><div><dt>Winners</dt><dd>33.7%</dd></div></dl></div>
 <div class="rcard"><div class="rc-h">Last 90 days</div><dl><div><dt>Net</dt><dd class="pos">+$9,135</dd></div><div><dt>Trades</dt><dd>69</dd></div><div><dt>Profit factor</dt><dd>1.42</dd></div><div><dt>Winners</dt><dd>34.8%</dd></div></dl></div></div>
 
-<div class="band band-risk">
-  <h2>What it costs to hold</h2>
-  <p>These figures are from the same backtest as the ones above. They are not the small print.</p>
-  <div class="grid">
-    <div class="stat"><div class="n neg">−$14,513</div><div class="l">Largest drawdown — 29.0% of a $50,000 account</div></div>
-    <div class="stat"><div class="n neg">−$13,068</div><div class="l">Worst 90-day stretch</div></div>
-    <div class="stat"><div class="n neg">−$5,262</div><div class="l">Worst month (January 2026)</div></div>
-    <div class="stat"><div class="n">167</div><div class="l">Days without a new equity high</div></div>
-    <div class="stat"><div class="n neg">13</div><div class="l">Longest losing streak, −$6,094</div></div>
-    <div class="stat"><div class="n">20/37</div><div class="l">Months that made money (54%)</div></div>
-  </div>
-  <h3>The drawdown is bigger than an evaluation allows</h3>
-  <p>Most $50,000 evaluations breach at a trailing drawdown of <strong>$2,000–$2,500</strong>. The worst
-  drawdown in this backtest was <strong>−$14,513</strong> at the default size — roughly <strong>six times</strong>
-  that limit. An account running this at 8 micros through Dec 2025–Feb 2026 would have been closed, several
-  times over. That is the single most important number on this page.</p>
-  <h3>It passes about a third of evaluations</h3>
-  <p>Replayed against real firm rules on a $50,000 evaluation, the best plan tested passed
-  <strong>32.4%</strong> of attempts. Roughly two attempts in three failed. If your plan assumes one
-  attempt and done, it is the wrong plan.</p>
-  <h3>Most trades lose, and a few trades carry it</h3>
-  <p>The win rate is <strong>35.2%</strong>. The average winner is <strong>$923</strong> against an average
-  loser of <strong>$400</strong> — about <strong>2.3:1</strong>. There were <strong>24</strong> separate
-  runs of six or more consecutive losses, and the worst was <strong>13 trades in a row, −$6,094</strong>.
-  Strip out the best 1% of trades and the profit factor falls from 1.25 to <strong>1.11</strong>; the nine
-  biggest winners alone are <strong>54%</strong> of all profit. A handful of trades did the heavy lifting,
-  and there is no guarantee they repeat.</p>
-</div>
 
-<div class="note">
-  <strong>Three things the backtest cannot tell you.</strong>
-  <ol>
-    <li>The tester fills orders at the close of the bar that triggered them. Filling on the next bar instead —
-      closer to live — gives about <strong>2.7% less</strong> profit. Treat every figure above as the
-      optimistic end.</li>
-    <li>Stops are judged on 1-minute closes, so a fast move can carry you past the stop before you are out.
-      In live use a stop has filled <strong>37 ticks</strong> beyond its level against a modelled 2 ticks —
-      about <strong>$148</strong> of extra loss on one trade at the default size.</li>
-    <li>These results are one instrument, one timeframe and <strong>one configuration chosen after dozens of
-      test runs</strong>. That process can flatter a result. There is <strong>no live track record</strong>,
-      and the beta has not been traded with real money.</li>
-  </ol>
-</div>
 
 <h2>What you need</h2>
 <ul>
@@ -207,6 +179,13 @@ last closed trade.</p>
   <a class="cta" href="#access">Request Closed Beta access</a>
   <p class="fine" style="margin-top:12px">Access is granted one person at a time, free of charge, and can be
   withdrawn at any time.</p>
+</div>
+
+<div class="note">
+  <strong>The honest one-liner.</strong> These are backtested results, not a live track record:
+  35.2% of trades win, the worst drawdown was −$14,513 — roughly six times the trailing limit on a typical
+  $50,000 evaluation — and replayed against real firm rules it passed 32.4% of evaluation attempts.
+  Run the Deep Backtest yourself before you risk anything, and start on a demo account.
 </div>
 
 <footer>
