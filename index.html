@@ -96,23 +96,32 @@
 </header>
 
 <div class="band band-usp">
-  <h2>The daily loss limit is the point</h2>
-  <p>Most strategies blow prop evaluations on one bad day. This one tracks the day's profit and loss —
-  <em>including the trade that is still open</em> — and refuses a setup when the risk would not fit in the room
-  left under the limit.</p>
+  <h2>The daily limit is arithmetic, not hope</h2>
+  <p>Before it takes a trade, the engine measures the stop risk against what is left of the day's limit and
+  <strong>refuses the setup if it does not fit</strong>. The room shrinks by exactly what the day has already
+  lost, so the worst a day can reach is capped by arithmetic rather than by judgement. At the default size
+  that ceiling is about <strong>$966</strong>.</p>
   <div class="grid">
-    <div class="stat"><div class="n">631</div><div class="l">Trading days, 20 Sep 2023 – 17 Sep 2026</div></div>
-    <div class="stat"><div class="n">−$962</div><div class="l">Worst day’s closed profit and loss</div></div>
+    <div class="stat"><div class="n">631</div><div class="l">Days it traded, of 782 weekdays</div></div>
+    <div class="stat"><div class="n">−$962</div><div class="l">Worst day's closed profit and loss</div></div>
+    <div class="stat"><div class="n">$966</div><div class="l">The ceiling the entry gate allows</div></div>
     <div class="stat"><div class="n pos">0</div><div class="l">Days closing beyond the $1,000 limit</div></div>
   </div>
-  <p class="fine"><strong>What these numbers are measured at.</strong> 8 micro MNQ contracts — the default
-  size — on a $50,000 account, commission and slippage included. The $1,000 figure is the strategy’s
-  <em>own</em> daily loss limit, not a prop firm’s: it is set inside the engine and scales with your
-  position size, so at 2 micros the limit is $250. It is not a statement about your firm’s rules — check
-  those yourself. These are <strong>closed-trade daily totals</strong>: the engine also counts the open
-  trade when deciding whether to take a setup, but what is counted here is where each day finished.
-  TradingView’s Strategy Tester will not show you this figure at all — it reports the largest drawdown,
-  never the worst <em>day</em>.</p>
+  <p>The worst day reached <strong>99.6%</strong> of that ceiling, and <strong>26</strong> days
+  finished worse than −$900. The strategy goes right up to the line regularly and is stopped there — so the
+  cap is doing real work, not sitting unused.</p>
+  <p><strong>And here is the control.</strong> Run the same engine with the budget check switched off and it
+  closed a day at <strong>−$1,631</strong>, four times its limit, even though the emergency flatten fired 206
+  times. The flatten alone does not hold the line. The pre-trade check does.</p>
+  <p class="fine"><strong>What this guarantee is and is not.</strong> Measured at 8 micro MNQ contracts, the
+  default size, on a $50,000 account with commission and slippage included. The $1,000 is the strategy's
+  <em>own</em> limit, not a prop firm's; it scales with position size, so at 2 micros it is $250. Check your
+  firm's rules yourself. It holds <em>at modelled costs</em>: the gap between the worst day and the ceiling is
+  <strong>$3.80</strong>, and a stop filling well past its level — we have measured 37 ticks, about $148
+  at this size — would take that day to about −$1,110 and through the limit. It is also a
+  <strong>closed-day</strong> measure: it says where days finished, not that the account never dipped below
+  the limit with a trade still open. TradingView's Strategy Tester reports none of this — it gives you the
+  largest drawdown, never the worst day.</p>
 </div>
 
 <h2>The three-year backtest</h2>
