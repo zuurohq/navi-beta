@@ -90,9 +90,9 @@
 <header>
   <span class="tag">Closed Beta · No cost · by invitation</span>
   <h1>NAVI-Prop-Strat <span style="color:var(--muted)">BETA</span></h1>
-  <p class="lede">An automated strategy for Micro Nasdaq futures, built to trade inside prop-firm daily loss
-  limits. Over three years of backtesting it made money — and it would have failed roughly two evaluation
-  attempts in three. Both halves of that sentence matter, so this page gives you both.</p>
+  <p class="lede">An automated strategy for Micro Nasdaq futures with a daily loss limit built into the
+  engine — not bolted on afterwards. Across 631 trading days of backtesting at its default size, no
+  day closed beyond that limit.</p>
 </header>
 
 <div class="band band-usp">
@@ -101,12 +101,18 @@
   <em>including the trade that is still open</em> — and refuses a setup when the risk would not fit in the room
   left under the limit.</p>
   <div class="grid">
-    <div class="stat"><div class="n">631</div><div class="l">Trading days backtested</div></div>
-    <div class="stat"><div class="n">−$962</div><div class="l">Worst single day</div></div>
-    <div class="stat"><div class="n pos">0</div><div class="l">Days that broke the $1,000 limit</div></div>
+    <div class="stat"><div class="n">631</div><div class="l">Trading days, 20 Sep 2023 – 17 Sep 2026</div></div>
+    <div class="stat"><div class="n">−$962</div><div class="l">Worst day’s closed profit and loss</div></div>
+    <div class="stat"><div class="n pos">0</div><div class="l">Days closing beyond the $1,000 limit</div></div>
   </div>
-  <p class="fine">Note this is one number TradingView's Strategy Tester will not show you: it reports the
-  largest drawdown, but never the worst <em>day</em>.</p>
+  <p class="fine"><strong>What these numbers are measured at.</strong> 8 micro MNQ contracts — the default
+  size — on a $50,000 account, commission and slippage included. The $1,000 figure is the strategy’s
+  <em>own</em> daily loss limit, not a prop firm’s: it is set inside the engine and scales with your
+  position size, so at 2 micros the limit is $250. It is not a statement about your firm’s rules — check
+  those yourself. These are <strong>closed-trade daily totals</strong>: the engine also counts the open
+  trade when deciding whether to take a setup, but what is counted here is where each day finished.
+  TradingView’s Strategy Tester will not show you this figure at all — it reports the largest drawdown,
+  never the worst <em>day</em>.</p>
 </div>
 
 <h2>The three-year backtest</h2>
@@ -162,7 +168,8 @@ evaluation at one firm is a different problem from the same size at another. So 
 flattering one, here is the whole grid: <strong>63 evaluation plans and 57 payout plans across 14 firms</strong>,
 each replayed trade by trade against that firm's own rules.</p>
 <div class="card">
-  <a class="cta cta-2" href="https://zuurohq.github.io/navi-prop-pass-map/" target="_blank" rel="noopener">Open the Evaluation Pass Map</a>
+  <!-- CTA target: replace href="#" with the Evaluation Pass Map URL when ready -->
+  <a class="cta cta-2" href="#">Open the Evaluation Pass Map</a>
   <p class="fine" style="margin-top:12px">Every rate carries a 95% confidence interval and its
   last-twelve-month figure, so you can see which results are solid and which are inside the noise. Where a
   firm's rules came from an aggregator rather than the firm's own page, the card says so. Account sizes from
@@ -179,8 +186,8 @@ each replayed trade by trade against that firm's own rules.</p>
 
 <h2 id="access">Getting into the Closed Beta</h2>
 <div class="card">
-  <p><strong>Four places. Demo accounts only. No cost.</strong> The Closed Beta is deliberately tiny so that
-  setup problems get found by people who can afford to hit them, not by a room full of traders.</p>
+  <p><strong>Demo accounts only. No cost.</strong> The Closed Beta is deliberately small so that setup
+  problems get found by people who can afford to hit them, not by a room full of traders.</p>
   <p><strong>Taking part is free.</strong> There is no fee for the Closed Beta, nothing to subscribe to and no
   payment details are asked for at any point. If anyone asks you to pay for access to this beta, it is not us.</p>
   <ol class="steps">
