@@ -156,9 +156,11 @@
 
   <div class="caveat">
     <p><strong>What this does not say.</strong></p>
-    <p><strong>Costs.</strong> It holds at modelled costs. The margin is $3.80 — less than one bad
-    fill. We have measured a stop filling 37 ticks past its level, about $148 here, which would take that day
-    to roughly −$1,110 and through the limit.</p>
+    <p><strong>Costs.</strong> It holds at modelled costs, and the margin is $3.80 — less than one
+    bad fill. How bad a real fill gets, <strong>nobody has measured</strong>, including us. What we can say
+    is how much it would matter: re-running the whole backtest at worse fills puts the profit factor at 1.06
+    at 8 ticks per side and 0.96 — a loss — at 12. Roughly two thirds of trades exit at the stop, so fill
+    quality is the whole margin here.</p>
     <p><strong>Closed days.</strong> It says where days finished, not that the account never dipped below the
     limit with a trade open.</p>
     <p><strong>Whose limit.</strong> The $1,000 is the strategy's own, not your firm's, and it scales with
