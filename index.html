@@ -112,6 +112,13 @@
     background:var(--accent);color:var(--accent-ink);font-size:13px;font-weight:680;display:grid;place-items:center}
   footer{margin:60px 0 40px;padding-top:24px;border-top:1px solid var(--rule);font-size:13.5px;color:var(--muted)}
   footer p{max-width:var(--measure)}
+
+/* A call to action with no destination must LOOK broken, or it is a lie with a hover state. */
+.cta[data-broken]{position:relative;opacity:.55;cursor:not-allowed;
+  background:repeating-linear-gradient(45deg,#c9ccd1,#c9ccd1 6px,#dcdfe3 6px,#dcdfe3 12px);
+  color:#3a3f45;border-color:#a8adb4;box-shadow:none}
+.cta[data-broken]::after{content:"link not set: " attr(data-broken);display:block;
+  font-size:11px;font-weight:600;letter-spacing:.02em;margin-top:4px;color:#8a2f22}
 </style>
 </head>
 <body>
@@ -161,6 +168,12 @@
     is how much it would matter: re-running the whole backtest at worse fills puts the profit factor at 1.06
     at 8 ticks per side and 0.96 — a loss — at 12. Roughly two thirds of trades exit at the stop, so fill
     quality is the whole margin here.</p>
+    <p><strong>The contract.</strong> These results are measured on MNQ1!, a <em>continuous</em> contract
+    that switches to a new futures contract four times a year. Before each switch the old contract is thin;
+    after it, the stored history for those dates carries the new contract's prices instead. <strong>about 79 trades —
+    8.5% of the record — fall in that window and carry 24% of the profit</strong>, at a profit factor of 1.855
+    against 1.212 everywhere else. The most profitable slice of this record sits on the prices least able to
+    reproduce a real fill. Trade the dated contract (MNQZ6 and so on) if you can.</p>
     <p><strong>Closed days.</strong> It says where days finished, not that the account never dipped below the
     limit with a trade open.</p>
     <p><strong>Whose limit.</strong> The $1,000 is the strategy's own, not your firm's, and it scales with
@@ -227,8 +240,9 @@ evaluation at one firm is a different problem from the same size at another. So 
 flattering one, here is the whole grid: <strong>63 evaluation plans and 57 payout plans across 14 firms</strong>,
 each replayed trade by trade against that firm's own rules.</p>
 <div class="card">
-  <!-- CTA target: replace href="#" with the Evaluation Pass Map URL when ready -->
-  <a class="cta cta-2" href="#">Open the Evaluation Pass Map</a>
+  <!-- Pass Map CTA: live at zuurohq.github.io/navi-prop-pass-map/ (verified 2026-09-20).
+       The access CTA below still has no destination and is rendered visibly broken on purpose. -->
+  <a class="cta cta-2" href="https://zuurohq.github.io/navi-prop-pass-map/">Open the Evaluation Pass Map</a>
   <p class="fine" style="margin-top:12px">Every rate carries a 95% confidence interval and its
   last-twelve-month figure, so you can see which results are solid and which are inside the noise. Where a
   firm's rules came from an aggregator rather than the firm's own page, the card says so. Account sizes from
@@ -256,7 +270,7 @@ each replayed trade by trade against that firm's own rules.</p>
     <li>You receive an invitation to the script on TradingView.</li>
     <li>Set it up on a <strong>demo account</strong> and tell us what went wrong. That is the point.</li>
   </ol>
-  <a class="cta" href="#access">Request Closed Beta access</a>
+  <a class="cta" href="#" data-broken="needs an email address or Discord invite">Request Closed Beta access</a>
   <p class="fine" style="margin-top:12px">Access is granted one person at a time, free of charge, and can be
   withdrawn at any time.</p>
 </div>
